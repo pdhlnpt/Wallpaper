@@ -8,11 +8,20 @@
 
 #import "CCAppDelegate.h"
 
+
 @implementation CCAppDelegate
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    NSString *musicpath = [[NSBundle mainBundle] pathForResource:@"music" ofType:@"mp3"];
+    
+    self.backGroundMusic = [[AVAudioPlayer alloc]initWithContentsOfURL:[NSURL URLWithString:musicpath] error:nil];
+    self.backGroundMusic.delegate = self;
+    self.backGroundMusic.numberOfLoops = -1;
+    [self.backGroundMusic prepareToPlay];
+    [self.backGroundMusic play];
     return YES;
 }
 							
@@ -41,6 +50,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Helper Method
+
+- (void)playMusic
+{
+    [self.backGroundMusic play];
+}
+
+- (void)pauseMusic
+{
+    [self.backGroundMusic pause];
 }
 
 @end

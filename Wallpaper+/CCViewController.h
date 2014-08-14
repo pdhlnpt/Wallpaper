@@ -10,4 +10,6 @@
 
 @interface CCViewController : UIViewController
 
+
+@property (strong, nonatomic) NSString *categoryName;
 @end
